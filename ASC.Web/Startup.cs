@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using ASC.Web.Data;
 using ASC.Web.Models;
 using ASC.Web.Services;
+using ASC.Web.Configuration;
 
 namespace ASC.Web
 {
@@ -49,6 +50,10 @@ namespace ASC.Web
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+
+            // Utilizar desde el formato json la configuración predeterminada
+            services.AddOptions();
+            services.Configure<ApplicationSettings>(Configuration.GetSection("AppSettings"));
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
